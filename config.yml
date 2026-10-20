@@ -36,4 +36,4 @@ task:
     apply: true
     merge: patch
 tools:
-  approvalMode: write
+  approvalMode: yolo

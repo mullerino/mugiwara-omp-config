@@ -29,4 +29,4 @@ Para outros sistemas, o diretório padrão é `~/.omp/agent`.
 
 Este repositório não contém banco de autenticação, credenciais, histórico, sessões, cache, `models.db`, `agent.db`, `mcp.json` ou configurações de projetos. Faça login separadamente em cada máquina. Configurações locais do projeto e opções de inicialização podem sobrepor valores globais.
 
-`config.yml` preserva as opções da máquina de origem, inclusive `dev.autoqaConsent: granted` e `tools.approvalMode: write`; revise-as antes de instalar em outra máquina.
+`config.yml` preserva as opções da máquina de origem, inclusive `dev.autoqaConsent: granted` e `tools.approvalMode: yolo`; o modo yolo aprova automaticamente chamadas comuns de leitura, escrita e execução. Políticas explícitas de bloqueio/pergunta e verificações de segurança do provedor ainda podem intervir. Revise antes de instalar em outra máquina.
