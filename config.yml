@@ -1,0 +1,39 @@
+modelRoles:
+  default: openai-codex/gpt-6.1-sol:medium
+symbolPreset: ascii
+composer:
+  shape: borderless
+theme:
+  dark: titanium
+setupVersion: 2
+dev:
+  autoqaConsent: granted
+mcp:
+  enableProjectConfig: false
+task:
+  maxConcurrency: 2
+  maxRecursionDepth: 1
+  maxEffort: max
+  maxRuntimeMs: 1200000
+  softRequestBudget: 24
+  softRequestBudgetNotice: true
+  enableLsp: true
+  disabledAgents:
+    - task
+    - sonic
+    - seance
+    - reviewer
+    - scout
+    - security-reviewer
+  agentModelOverrides:
+    jinbe: openai-codex/gpt-6-luna:max
+    franky: openai-codex/gpt-6-luna:max
+    nami: openai-codex/gpt-6-luna:max
+    robin: openai-codex/gpt-6-luna:max
+    zoro: openai-codex/gpt-6-luna:max
+  isolation:
+    enabled: true
+    apply: true
+    merge: patch
+tools:
+  approvalMode: write
