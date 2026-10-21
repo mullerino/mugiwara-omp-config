@@ -25,6 +25,14 @@ Snapshot da configuração global da tripulação Mugiwara para OMP 18.12.3.
 
 Para outros sistemas, o diretório padrão é `~/.omp/agent`.
 
+## Execução local em worktree
+
+Franky usa `isolated=false` somente para preparar e iniciar a aplicação na worktree atual da sessão sem alterar código. Alterações de código continuam em chamadas `isolated=true`; depois do patch aplicado, a inicialização local é uma etapa separada.
+
+Franky pode preparar a worktree isolada para executar a aplicação: copiar `.env` de uma origem correspondente apenas se estiver ausente, sem ler nem divulgar seus valores; copiar `node_modules` se estiver ausente; definir portas somente para o processo; iniciar o script documentado e verificar `localhost`. Dependências instaladas e `.env` nunca devem ser versionados.
+
+Antes da inicialização, confira se os scripts fazem sincronização ou migração de banco. Não inicie com banco remoto/compartilhado nem com escrita de esquema fora de uma base local descartável sem confirmação de que o alvo é seguro.
+
 ## Dados excluídos
 
 Este repositório não contém banco de autenticação, credenciais, histórico, sessões, cache, `models.db`, `agent.db`, `mcp.json` ou configurações de projetos. Faça login separadamente em cada máquina. Configurações locais do projeto e opções de inicialização podem sobrepor valores globais.
