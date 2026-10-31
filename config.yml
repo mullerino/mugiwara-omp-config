@@ -1,16 +1,56 @@
 modelRoles:
-  default: openai-codex/gpt-6.1-sol:medium
+  commit: openai-codex/gpt-6-luna
+  default: anthropic/claude-opus-5-5:medium
+  web: openai-codex/gpt-6-luna:max
+  dictation: local/parakeet-tdt-0.6b-v3
+  speech: local/kokoro
+  worker: openai-codex/gpt-6-luna:max
+  crew_exec_complex: anthropic/claude-opus-5-5:low
+  crew_exec_simple: anthropic/claude-sonnet-5-5:low
+  crew_architect: openai-codex/gpt-6.1-sol:high
+  crew_scout: openai-codex/gpt-6.1-terra:low
+  crew_reviewer: openai-codex/gpt-6.1-sol:medium
+  crew_security: openai-codex/gpt-6.1-sol:medium
+retry:
+  fallbackChains:
+    default:
+      - openai-codex/gpt-6.1-sol:medium
+    orchestrator:
+      - openai-codex/gpt-6.1-sol:high
+    crew_exec_complex:
+      - openai-codex/gpt-6.1-sol:medium
+    crew_exec_simple:
+      - openai-codex/gpt-6.1-terra:low
+    crew_architect:
+      - anthropic/claude-opus-5-5:medium
+    crew_scout:
+      - anthropic/claude-sonnet-5-5:low
+    crew_reviewer:
+      - anthropic/claude-opus-5-5:medium
+    crew_security:
+      - anthropic/claude-opus-5-5:medium
 symbolPreset: ascii
 composer:
   shape: borderless
 theme:
+  light: light
   dark: titanium
 setupVersion: 2
 dev:
   autoqaConsent: granted
-mcp:
-  enableProjectConfig: false
+stt:
+  enabled: true
+hideThinkingBlock: true
 task:
+  agentModelOverrides:
+    task: "@worker"
+    sonic: "@worker"
+    jinbe: "@crew_architect"
+    franky: "@crew_exec_complex"
+    usopp: "@crew_exec_simple"
+    nami: "@crew_scout"
+    robin: "@crew_reviewer"
+    zoro: "@crew_security"
   maxConcurrency: 2
   maxRecursionDepth: 1
   maxEffort: max
@@ -25,15 +65,11 @@ task:
     - reviewer
     - scout
     - security-reviewer
-  agentModelOverrides:
-    jinbe: openai-codex/gpt-6-luna:max
-    franky: openai-codex/gpt-6-luna:max
-    nami: openai-codex/gpt-6-luna:max
-    robin: openai-codex/gpt-6-luna:max
-    zoro: openai-codex/gpt-6-luna:max
   isolation:
     enabled: true
     apply: true
     merge: patch
+mcp:
+  enableProjectConfig: false
 tools:
   approvalMode: yolo

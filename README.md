@@ -1,18 +1,24 @@
 # Mugiwara OMP Config
 
-Snapshot da configuração global da tripulação Mugiwara para OMP 18.12.3.
+Snapshot da configuração global da tripulação Mugiwara para OMP 18.14.2.
 
 ## Conteúdo
 
 - `config.yml`: modelo padrão, roteamento dos agentes, limites de delegação, isolamento e aprovação.
+- `AGENTS.md`: padrão global de trabalho, delegação e verificação.
 - `RULES.md`: instruções globais carregadas pelo OMP.
 - `Orchestrator.md`: cópia legível do papel e do fluxo do Luffy.
 - `agents/`: definições dos agentes da tripulação e os arquivos nativos preservados na configuração de origem.
 
 ## Modelos e limites definidos
 
-- Agente principal: `openai-codex/gpt-6.1-sol:medium`.
-- Jinbe, Franky, Nami, Robin e Zoro: `openai-codex/gpt-6-luna:max`.
+- Agente principal (`default`): `anthropic/claude-opus-5-5:medium`; fallback `openai-codex/gpt-6.1-sol:high`.
+- Jinbe (`crew_architect`): `openai-codex/gpt-6.1-sol:high`; fallback `anthropic/claude-opus-5-5:medium`.
+- Franky (`crew_exec_complex`): `anthropic/claude-opus-5-5:low`; fallback `openai-codex/gpt-6.1-sol:medium`.
+- Usopp (`crew_exec_simple`): `anthropic/claude-sonnet-5-5:low`; fallback `openai-codex/gpt-6.1-terra:low`.
+- Nami (`crew_scout`): `openai-codex/gpt-6.1-terra:low`; fallback `anthropic/claude-sonnet-5-5:low`.
+- Robin (`crew_reviewer`) e Zoro (`crew_security`): `openai-codex/gpt-6.1-sol:medium`; fallback `anthropic/claude-opus-5-5:medium`.
+- Os modelos são definidos em `modelRoles` e `retry.fallbackChains`; `task.agentModelOverrides` liga cada agente à sua role.
 - Concorrência máxima: 2 agentes; profundidade de delegação: 1.
 
 ## Instalação no Windows
